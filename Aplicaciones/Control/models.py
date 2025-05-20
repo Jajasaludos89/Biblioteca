@@ -9,3 +9,13 @@ class Libro(models.Model):
     def __str__(self):
         fila = "{0}: {1} - {2}"
         return fila.format(self.codigo, self.titulo, self.autor)
+    
+class Usuario(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    cedula = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=200)
+
+    def __str__(self):
+        fila = "{0} - {1}"
+        return fila.format(self.cedula, self.nombre)
