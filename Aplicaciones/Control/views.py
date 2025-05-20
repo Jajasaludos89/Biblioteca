@@ -226,7 +226,7 @@ def eliminarEquipo(request, id):
 def editarEquipo(request, id):
     equipo = Equipo.objects.get(id=id)
     jugadores = Jugador.objects.all()
-    return render(request, "editarJugador.html", {
+    return render(request, "editarEquipo.html", {
         'equipoEditar': equipo,
         'jugadores': jugadores
     })

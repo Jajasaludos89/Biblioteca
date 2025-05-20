@@ -1,0 +1,48 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Editar Equipo</h1>
+        <form action="/procesarEdicionEquipo" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ equipoEditar.id }}">
+
+            <label for="jugador">Jugador:</label><br>
+            <select class="form-control" name="jugador" id="jugador" required>
+                {% for jugador in jugadores %}
+                    <option value="{{ jugador.id }}" {% if jugador.id == equipoEditar.jugador.id %}selected{% endif %}>
+                        {{ jugador.nombre }}
+                    </option>
+                {% endfor %}
+            </select> <br><br>
+
+            <label for="nombre">Nombre:</label><br>
+            <input class="form-control" type="text" name="nombre" id="nombre" value="{{ equipoEditar.nombre }}" required> <br><br>
+
+            <label for="alias">Alias:</label><br>
+            <input class="form-control" type="text" name="alias" id="alias" value="{{ equipoEditar.alias }}" required> <br><br>
+
+            <label for="director">Director:</label><br>
+            <input class="form-control" type="text" name="director" id="director" value="{{ equipoEditar.director }}" required> <br><br>
+
+            <label for="localizacion">Localizacion:</label><br>
+            <input class="form-control" type="text" name="localizacion" id="localizacion" value="{{ equipoEditar.localizacion }}" required> <br><br>
+
+            <label for="fecha_prestamo">Fecha de Préstamo:</label><br>
+            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo" value="{{ prestamoEditar.fecha_prestamo }}" required> <br><br>
+
+            <button class="btn btn-warning" type="submit">
+                <i class="fa fa-pen"></i> Editar
+            </button>
+            <a class="btn btn-outline-danger" href="/equipos">
+                <i class="fa fa-times"></i> Cancelar
+            </a>
+        </form>
+        <br>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock %}
