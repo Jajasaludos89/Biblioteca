@@ -1,0 +1,26 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nuevo Préstamo</h1>
+        <form action="guardarPrestamo" method="post">
+            {% csrf_token %}
+            <label for="">ID Libro:</label><br>
+            <input class="form-control" type="text" name="id_libro" id="id_libro"> <br><br>
+            <label for="">ID Usuario:</label><br>
+            <input class="form-control" type="text" name="id_usuario" id="id_usuario"> <br><br>
+            <label for="">Fecha Préstamo:</label><br>
+            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo"> <br><br>
+            <label for="">Fecha Devolución:</label><br>
+            <input class="form-control" type="date" name="fecha_devolucion" id="fecha_devolucion"> <br><br>
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="/prestamos">Cancelar</a>
+        </form>
+        <br>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock %}
