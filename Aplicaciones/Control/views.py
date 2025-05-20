@@ -201,7 +201,7 @@ def equipos(request):
 
 def nuevoEquipo(request):
     jugadores = Jugador.objects.all()
-    return render(request, "nuevoEquipo.html", {'jugador': jugadores})
+    return render(request, "nuevoEquipo.html", {'jugadores': jugadores})
 
 def guardarEquipo(request):
     jugador_id = request.POST["jugador"]

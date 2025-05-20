@@ -54,5 +54,5 @@ class Equipo(models.Model):
     
 
     def __str__(self):
-        fila = "Equipo {0} - {1}"
-        return fila.format(self.id, self.jugador.nombre)
+        fila = "Equipo {0} - {1} - {2} - {3} - {4} - {5}"
+        return fila.format(self.id, self.jugador.nombre, self.nombre, self.alias, self.director, self.localizacion, self.fecha_registro)
