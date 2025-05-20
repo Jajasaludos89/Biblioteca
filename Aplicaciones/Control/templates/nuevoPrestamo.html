@@ -5,16 +5,27 @@
     <div class="col-md-3"></div>
     <div class="col-md-6 bg-light">
         <h1>Nuevo Préstamo</h1>
-        <form action="guardarPrestamo" method="post">
+        <form action="/guardarPrestamo" method="post">
             {% csrf_token %}
-            <label for="">ID Libro:</label><br>
-            <input class="form-control" type="text" name="id_libro" id="id_libro"> <br><br>
-            <label for="">ID Usuario:</label><br>
-            <input class="form-control" type="text" name="id_usuario" id="id_usuario"> <br><br>
-            <label for="">Fecha Préstamo:</label><br>
-            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo"> <br><br>
-            <label for="">Fecha Devolución:</label><br>
-            <input class="form-control" type="date" name="fecha_devolucion" id="fecha_devolucion"> <br><br>
+            <label for="usuario">Usuario:</label><br>
+            <select class="form-control" name="usuario" id="usuario" required>
+                <option value="">Seleccione un usuario</option>
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                {% endfor %}
+            </select> <br><br>
+
+            <label for="libro">Libro:</label><br>
+            <select class="form-control" name="libro" id="libro" required>
+                <option value="">Seleccione un libro</option>
+                {% for libro in libros %}
+                    <option value="{{ libro.id }}">{{ libro.titulo }}</option>
+                {% endfor %}
+            </select> <br><br>
+
+            <label for="fecha_prestamo">Fecha de Préstamo:</label><br>
+            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo" required> <br><br>
+
             <button class="btn btn-success" type="submit">Guardar</button>
             <a class="btn btn-outline-danger" href="/prestamos">Cancelar</a>
         </form>
