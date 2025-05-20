@@ -1,0 +1,27 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nuevo Libro</h1>
+        <form action="/guardarLibro" method="post">
+            {% csrf_token %}
+            <label for="">Código:</label><br>
+            <input class="form-control" type="text" name="codigo" id="codigo"> <br> <br>
+
+            <label for="">Título:</label><br>
+            <input class="form-control" type="text" name="titulo" id="titulo"> <br> <br>
+
+            <label for="">Autor:</label><br>
+            <input class="form-control" type="text" name="autor" id="autor"> <br> <br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="/">Cancelar</a>
+        </form>
+        <br>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock %}
