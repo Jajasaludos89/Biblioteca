@@ -7,15 +7,29 @@
         <h1>Editar Préstamo</h1>
         <form action="/procesarEdicionPrestamo" method="post">
             {% csrf_token %}
-            <input type="hidden" name="id" value="{{prestamoEditar.id}}">
-            <label for="">ID Libro:</label><br>
-            <input class="form-control" type="text" name="id_libro" id="id_libro" value="{{prestamoEditar.id_libro}}"> <br><br>
-            <label for="">ID Usuario:</label><br>
-            <input class="form-control" type="text" name="id_usuario" id="id_usuario" value="{{prestamoEditar.id_usuario}}"> <br><br>
-            <label for="">Fecha Préstamo:</label><br>
-            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo" value="{{prestamoEditar.fecha_prestamo|date:'Y-m-d'}}"> <br><br>
-            <label for="">Fecha Devolución:</label><br>
-            <input class="form-control" type="date" name="fecha_devolucion" id="fecha_devolucion" value="{{prestamoEditar.fecha_devolucion|date:'Y-m-d'}}"> <br><br>
+            <input type="hidden" name="id" value="{{ prestamoEditar.id }}">
+
+            <label for="usuario">Usuario:</label><br>
+            <select class="form-control" name="usuario" id="usuario" required>
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}" {% if usuario.id == prestamoEditar.usuario.id %}selected{% endif %}>
+                        {{ usuario.nombre }}
+                    </option>
+                {% endfor %}
+            </select> <br><br>
+
+            <label for="libro">Libro:</label><br>
+            <select class="form-control" name="libro" id="libro" required>
+                {% for libro in libros %}
+                    <option value="{{ libro.id }}" {% if libro.id == prestamoEditar.libro.id %}selected{% endif %}>
+                        {{ libro.titulo }}
+                    </option>
+                {% endfor %}
+            </select> <br><br>
+
+            <label for="fecha_prestamo">Fecha de Préstamo:</label><br>
+            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo" value="{{ prestamoEditar.fecha_prestamo }}" required> <br><br>
+
             <button class="btn btn-warning" type="submit">
                 <i class="fa fa-pen"></i> Editar
             </button>
