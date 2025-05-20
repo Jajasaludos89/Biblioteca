@@ -12,14 +12,14 @@
     </div>
 </div>
 <br>
+
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr class="bg-info">
             <th>ID</th>
-            <th>ID Libro</th>
-            <th>ID Usuario</th>
+            <th>Libro</th>
+            <th>Usuario</th>
             <th>Fecha Préstamo</th>
-            <th>Fecha Devolución</th>
             <th>ACCIONES</th>
         </tr>
     </thead>
@@ -27,10 +27,9 @@
         {% for prestamo in prestamos %}
         <tr>
             <td>{{ prestamo.id }}</td>
-            <td>{{ prestamo.id_libro }}</td>
-            <td>{{ prestamo.id_usuario }}</td>
+            <td>{{ prestamo.libro.titulo }}</td>
+            <td>{{ prestamo.usuario.nombre }}</td>
             <td>{{ prestamo.fecha_prestamo }}</td>
-            <td>{{ prestamo.fecha_devolucion }}</td>
             <td>
                 <a href="editarPrestamo/{{ prestamo.id }}" class="btn btn-outline-warning">
                     <i class="fa fa-pen"></i>
@@ -39,6 +38,10 @@
                     <i class="fa fa-trash"></i>
                 </a>
             </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No hay préstamos registrados.</td>
         </tr>
         {% endfor %}
     </tbody>
