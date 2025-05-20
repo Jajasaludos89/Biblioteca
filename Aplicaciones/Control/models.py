@@ -19,3 +19,13 @@ class Usuario(models.Model):
     def __str__(self):
         fila = "{0} - {1}"
         return fila.format(self.cedula, self.nombre)
+
+class Prestamo(models.Model):
+    id = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    fecha_prestamo = models.DateField()
+
+    def __str__(self):
+        fila = "Préstamo {0} - {1} - {2}"
+        return fila.format(self.id, self.usuario.nombre, self.libro.titulo)
