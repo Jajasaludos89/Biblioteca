@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Libro, Usuario, Prestamo
+from .models import Libro, Usuario, Prestamo, Jugador, Equipo
 from django.contrib import messages  
 
 #LIBROS
@@ -141,3 +141,53 @@ def procesarEdicionPrestamo(request):
 
     messages.success(request, "Préstamo ACTUALIZADO exitosamente")
     return redirect('/prestamos')
+
+#Jugador
+
+
+def jugadores(request):
+    listadoJugadores = Jugador.objects.all()
+    return render(request, "jugadores.html", {'jugadores': listadoJugadores})
+
+def nuevoJugador(request):
+    return render(request, "nuevoJugador.html")
+
+def guardarJugador(request):
+    nombre = request.POST["nombre"]
+    apellido = request.POST["apellido"]
+    alias = request.POST["alias"]
+    numero = request.POST["numero"]
+    posicion = request.POST["posicion"]
+
+    Jugador.objects.create(nombre=nombre, apellido=apellido, alias=alias, numero=numero, posicion=posicion)
+    messages.success(request, "Jugador GUARDADO exitosamente")
+    return redirect('/jugadores')
+
+def eliminarJugador(request, id):
+    jugador = Jugador.objects.get(id=id)
+    jugador.delete()
+    messages.success(request, "Jugador ELIMINADO exitosamente")
+    return redirect('/jugadores')
+
+def editarJugador(request, id):
+    jugador = Jugador.objects.get(id=id)
+    return render(request, "editarJugador.html", {'jugadorEditar': jugador})
+
+def procesarEdicionJugador(request):
+    id = request.POST["id"]
+    nombre = request.POST["nombre"]
+    apellido = request.POST["apellido"]
+    alias = request.POST["alias"]
+    numero = request.POST["numero"]
+    posicion = request.POST["posicion"]
+
+    jugador = Jugador.objects.get(id=id)
+    jugador.nombre = nombre
+    jugador.apellido = apellido
+    jugador.alias = alias
+    jugador.numero = numero
+    jugador.posicion = posicion
+    jugador.save()
+
+    messages.success(request, "Jugador ACTUALIZADO exitosamente")
+    return redirect('/jugadores')
