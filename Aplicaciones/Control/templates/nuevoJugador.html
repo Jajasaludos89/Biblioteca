@@ -1,0 +1,33 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nuevo Jugador</h1>
+        <form action="/guardarJugador" method="post">
+            {% csrf_token %}
+            <label for="">Nombre:</label><br>
+            <input class="form-control" type="text" name="nombre" id="nombre"> <br><br>
+
+            <label for="">Apellido:</label><br>
+            <input class="form-control" type="text" name="apellido" id="apellido"> <br><br>
+
+            <label for="">Alias:</label><br>
+            <input class="form-control" type="text" name="alias" id="alias"> <br><br>
+
+            <label for="">Numero:</label><br>
+            <input class="form-control" type="text" name="numero" id="numero"> <br><br>
+
+            <label for="">Posicion:</label><br>
+            <input class="form-control" type="text" name="posicion" id="posicion"> <br><br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="/jugadores">Cancelar</a>
+        </form>
+        <br>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock %}
