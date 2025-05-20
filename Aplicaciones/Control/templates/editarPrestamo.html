@@ -1,0 +1,31 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Editar Préstamo</h1>
+        <form action="/procesarEdicionPrestamo" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{prestamoEditar.id}}">
+            <label for="">ID Libro:</label><br>
+            <input class="form-control" type="text" name="id_libro" id="id_libro" value="{{prestamoEditar.id_libro}}"> <br><br>
+            <label for="">ID Usuario:</label><br>
+            <input class="form-control" type="text" name="id_usuario" id="id_usuario" value="{{prestamoEditar.id_usuario}}"> <br><br>
+            <label for="">Fecha Préstamo:</label><br>
+            <input class="form-control" type="date" name="fecha_prestamo" id="fecha_prestamo" value="{{prestamoEditar.fecha_prestamo|date:'Y-m-d'}}"> <br><br>
+            <label for="">Fecha Devolución:</label><br>
+            <input class="form-control" type="date" name="fecha_devolucion" id="fecha_devolucion" value="{{prestamoEditar.fecha_devolucion|date:'Y-m-d'}}"> <br><br>
+            <button class="btn btn-warning" type="submit">
+                <i class="fa fa-pen"></i> Editar
+            </button>
+            <a class="btn btn-outline-danger" href="/prestamos">
+                <i class="fa fa-times"></i> Cancelar
+            </a>
+        </form>
+        <br>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock %}
