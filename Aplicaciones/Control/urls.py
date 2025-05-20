@@ -30,4 +30,11 @@ urlpatterns = [
     path('editarJugador/<int:id>', views.editarJugador),
     path('procesarEdicionJugador', views.procesarEdicionJugador),
 
+    path('equipos', views.equipos),
+    path('nuevoEquipo', views.nuevoEquipo),
+    path('guardarEquipo', views.guardarEquipo),
+    path('eliminarEquipo/<int:id>', views.eliminarEquipo),
+    path('editarEquipo/<int:id>', views.editarEquipo),
+    path('procesarEdicionEquipo', views.procesarEdicionEquipo),
+
 ]
