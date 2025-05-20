@@ -191,3 +191,66 @@ def procesarEdicionJugador(request):
 
     messages.success(request, "Jugador ACTUALIZADO exitosamente")
     return redirect('/jugadores')
+
+#Equipo 
+
+
+def equipos(request):
+    listadoEquipos = Equipo.objects.all()
+    return render(request, "equipos.html", {'equipos': listadoEquipos})
+
+def nuevoEquipo(request):
+    jugadores = Jugador.objects.all()
+    return render(request, "nuevoEquipo.html", {'jugador': jugadores})
+
+def guardarEquipo(request):
+    jugador_id = request.POST["jugador"]
+    nombre = request.POST["nombre"]
+    alias = request.POST["alias"]
+    director = request.POST["director"]
+    localizacion = request.POST["localizacion"]
+    fecha = request.POST["fecha_registro"]
+
+    jugador = Jugador.objects.get(id=jugador_id)
+
+    Equipo.objects.create(jugador=jugador, nombre=nombre, alias=alias, director=director, localizacion=localizacion, fecha_registro=fecha)
+    messages.success(request, "Equipo REGISTRADO exitosamente")
+    return redirect('/equipos')
+
+def eliminarEquipo(request, id):
+    equipo = Equipo.objects.get(id=id)
+    equipo.delete()
+    messages.success(request, "Equipo ELIMINADO exitosamente")
+    return redirect('/equipos')
+
+def editarEquipo(request, id):
+    equipo = Equipo.objects.get(id=id)
+    jugadores = Jugador.objects.all()
+    return render(request, "editarJugador.html", {
+        'equipoEditar': equipo,
+        'jugadores': jugadores
+    })
+
+def procesarEdicionEquipo(request):
+    id = request.POST["id"]
+    jugador_id = request.POST["jugador"]
+    nombre = request.POST["nombre"]
+    alias = request.POST["alias"]
+    director = request.POST["director"]
+    localizacion = request.POST["localizacion"]
+
+    fecha = request.POST["fecha_registro"]
+
+    equipo = Equipo.objects.get(id=id)
+    equipo.jugador = Jugador.objects.get(id=jugador_id)
+
+    equipo.nombre = nombre
+    equipo.alias = alias
+    equipo.director = director
+    equipo.localizacion = localizacion
+
+    equipo.fecha_prestamo = fecha
+    equipo.save()
+
+    messages.success(request, "Equipo ACTUALIZADO exitosamente")
+    return redirect('/equipos')
