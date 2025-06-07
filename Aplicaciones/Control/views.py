@@ -238,7 +238,6 @@ def procesarEdicionEquipo(request):
     alias = request.POST["alias"]
     director = request.POST["director"]
     localizacion = request.POST["localizacion"]
-
     fecha = request.POST["fecha_registro"]
 
     equipo = Equipo.objects.get(id=id)
@@ -249,7 +248,7 @@ def procesarEdicionEquipo(request):
     equipo.director = director
     equipo.localizacion = localizacion
 
-    equipo.fecha_prestamo = fecha
+    equipo.fecha_registro = fecha
     equipo.save()
 
     messages.success(request, "Equipo ACTUALIZADO exitosamente")
